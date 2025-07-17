@@ -5,25 +5,21 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Architecture
-import androidx.compose.material.icons.filled.Dashboard
-import androidx.compose.material.icons.filled.ViewColumn
-import androidx.compose.material.icons.filled.FormatListBulleted
-import androidx.compose.material.icons.filled.TextFields
-import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -42,117 +38,251 @@ fun FoundationScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(
-                    imageVector = Icons.Default.Architecture,
+                    imageVector = Icons.Default.Build,
                     contentDescription = null,
                     modifier = Modifier.size(48.dp),
                     tint = MaterialTheme.colorScheme.primary
                 )
                 
-                Spacer(modifier = Modifier.height(8.dp))
-                
                 Text(
-                    text = "Foundation Building Blocks",
+                    text = "Foundation",
                     style = MaterialTheme.typography.headlineLarge,
                     textAlign = TextAlign.Center
                 )
                 
                 Text(
-                    text = "Core layout primitives, scrolling containers, text components, and theming fundamentals",
+                    text = "Core building blocks of Compose UI",
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 8.dp)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
         
-        // Demo Overview Cards
         item {
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(horizontal = 4.dp)
-            ) {
-                items(foundationDemoItems) { demo ->
-                    DemoOverviewCard(
-                        title = demo.title,
-                        icon = demo.icon,
-                        description = demo.description,
-                        modifier = Modifier.width(200.dp)
-                    )
-                }
-            }
+            LayoutDemo()
         }
         
-        // Layout Primitives Demo
         item {
-            LayoutPrimitivesDemo()
+            ModifiersDemo()
         }
         
-        // Text Components Demo
         item {
-            TextComponentsDemo()
+            TextDemo()
         }
         
-        // Surface & Cards Demo
         item {
-            SurfaceAndCardsDemo()
+            SurfaceDemo()
         }
         
-        // Scrolling & Lists Demo
         item {
-            ScrollingAndListsDemo()
+            ScrollingDemo()
         }
         
-        // Theming Demo
         item {
-            ThemingDemo()
-        }
-        
-        // Advanced Layout Demo
-        item {
-            AdvancedLayoutDemo()
+            LazyLayoutDemo()
         }
     }
 }
 
 @Composable
-private fun DemoOverviewCard(
-    title: String,
-    icon: ImageVector,
-    description: String,
-    modifier: Modifier = Modifier
-) {
+private fun LayoutDemo() {
     Card(
-        modifier = modifier,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                modifier = Modifier.size(32.dp),
-                tint = MaterialTheme.colorScheme.primary
+            Text(
+                text = "Layout Composables",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
             )
             
-            Spacer(modifier = Modifier.height(8.dp))
-            
+            // Row Example
             Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                textAlign = TextAlign.Center
+                text = "Row Layout:",
+                style = MaterialTheme.typography.titleSmall
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                repeat(3) { index ->
+                    Card(
+                        modifier = Modifier.size(50.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("${index + 1}")
+                        }
+                    }
+                }
+            }
+            
+            // Column Example
+            Text(
+                text = "Column Layout:",
+                style = MaterialTheme.typography.titleSmall
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    repeat(3) { index ->
+                        Card(
+                            modifier = Modifier.size(50.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                            )
+                        ) {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("${index + 1}")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ModifiersDemo() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Modifiers",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
             )
             
-            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                // Padding modifier
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primaryContainer,
+                            RoundedCornerShape(8.dp)
+                        )
+                        .padding(8.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primary,
+                            RoundedCornerShape(4.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "Padding",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+                
+                // Border modifier
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .border(
+                            3.dp,
+                            MaterialTheme.colorScheme.primary,
+                            RoundedCornerShape(8.dp)
+                        )
+                        .background(
+                            MaterialTheme.colorScheme.surface,
+                            RoundedCornerShape(8.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "Border",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                
+                // Clip modifier
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.tertiaryContainer),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "Clip",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TextDemo() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Text Styles",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
             
             Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                textAlign = TextAlign.Center,
+                text = "Headline Large",
+                style = MaterialTheme.typography.headlineLarge
+            )
+            
+            Text(
+                text = "Headline Medium",
+                style = MaterialTheme.typography.headlineMedium
+            )
+            
+            Text(
+                text = "Title Large",
+                style = MaterialTheme.typography.titleLarge
+            )
+            
+            Text(
+                text = "Body Large - This is a longer text to show body text styling",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            
+            Text(
+                text = "Body Medium - Regular body text",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            
+            Text(
+                text = "Label Small",
+                style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -160,119 +290,68 @@ private fun DemoOverviewCard(
 }
 
 @Composable
-private fun LayoutPrimitivesDemo() {
-    DemoCard(
-        title = "Layout Primitives",
-        subtitle = "Row, Column, Box, BoxWithConstraints"
+private fun SurfaceDemo() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Row example
-            Column {
-                Text(
-                    text = "Row Layout:",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+            Text(
+                text = "Surface & Cards",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Surface(
+                    modifier = Modifier.size(100.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(8.dp)
                 ) {
-                    repeat(3) { index ->
-                        Card(
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer
-                            )
-                        ) {
-                            Text(
-                                text = "Item ${index + 1}",
-                                modifier = Modifier.padding(12.dp)
-                            )
-                        }
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            "Surface",
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 }
-            }
-            
-            // Column example
-            Column {
-                Text(
-                    text = "Column Layout:",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
                 
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Card(
+                    modifier = Modifier.size(100.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
                 ) {
-                    repeat(3) { index ->
-                        Card(
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer
-                            ),
-                            modifier = Modifier.padding(vertical = 2.dp)
-                        ) {
-                            Text(
-                                text = "Column Item ${index + 1}",
-                                modifier = Modifier.padding(12.dp)
-                            )
-                        }
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            "Card",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 }
-            }
-            
-            // Box example
-            Column {
-                Text(
-                    text = "Box Layout (Overlay):",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
                 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(120.dp)
-                        .background(
-                            MaterialTheme.colorScheme.surfaceContainer,
-                            RoundedCornerShape(8.dp)
-                        )
+                ElevatedCard(
+                    modifier = Modifier.size(100.dp)
                 ) {
-                    Card(
-                        modifier = Modifier.align(Alignment.TopStart),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                        )
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Top Start",
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-                    
-                    Card(
-                        modifier = Modifier.align(Alignment.Center),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        )
-                    ) {
-                        Text(
-                            text = "Center",
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-                    
-                    Card(
-                        modifier = Modifier.align(Alignment.BottomEnd),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.errorContainer
-                        )
-                    ) {
-                        Text(
-                            text = "Bottom End",
-                            modifier = Modifier.padding(8.dp)
+                            "Elevated",
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 }
@@ -280,314 +359,88 @@ private fun LayoutPrimitivesDemo() {
         }
     }
 }
-        
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "Text Components",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    Text(
-                        text = "Display Large",
-                        style = MaterialTheme.typography.displayLarge
-                    )
-                    
-                    Text(
-                        text = "Headline Medium",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                    
-                    Text(
-                        text = "Title Large",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    
-                    Text(
-                        text = "Body Large - This is a longer text to demonstrate the body text style in Material 3 design system.",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    
-                    Text(
-                        text = "Label Small",
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                }
-            }
-        }
-        
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "Surface & Cards",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        ElevatedCard(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(
-                                text = "Elevated Card",
-                                modifier = Modifier.padding(16.dp),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                        
-                        Spacer(modifier = Modifier.width(8.dp))
-                        
-                        OutlinedCard(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(
-                                text = "Outlined Card",
-                                modifier = Modifier.padding(16.dp),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "Lazy Lists & Grids",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    Text(
-                        text = "LazyRow:",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(10) { index ->
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                                )
-                            ) {
-                                Text(
-                                    text = "Item $index",
-                                    modifier = Modifier.padding(8.dp)
-                                )
-                            }
-                        }
-                    }
-                    
-                    Spacer(modifier = Modifier.height(8.dp))
-                    
-                    Text(
-                        text = "LazyVerticalGrid:",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(3),
-                        modifier = Modifier.height(120.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        items(9) { index ->
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                                )
-                            ) {
-                                Text(
-                                    text = "${index + 1}",
-                                    modifier = Modifier.padding(8.dp),
-                                    textAlign = TextAlign.Center
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "BoxWithConstraints & Adaptive Layouts",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    BoxWithConstraints(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(120.dp)
-                    ) {
-                        val itemWidth = if (maxWidth > 300.dp) 100.dp else 80.dp
-                        val itemCount = (maxWidth / itemWidth).toInt()
-                        
-                        Row(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            repeat(itemCount) { index ->
-                                Card(
-                                    modifier = Modifier
-                                        .size(itemWidth, 60.dp)
-                                        .clip(RoundedCornerShape(8.dp)),
-                                    colors = CardDefaults.cardColors(
-                                        containerColor = MaterialTheme.colorScheme.secondaryContainer
-                                    )
-                                ) {
-                                    Box(
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            text = "${index + 1}",
-                                            style = MaterialTheme.typography.bodyMedium
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    Text(
-                        text = "Adaptive layout based on available width",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-        
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "Spacing & Arrangement",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    
-                    Text(
-                        text = "SpaceEvenly:",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        repeat(3) { index ->
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                                )
-                            ) {
-                                Text(
-                                    text = "${index + 1}",
-                                    modifier = Modifier.padding(8.dp)
-                                )
-                            }
-                        }
-                    }
-                    
-                    Text(
-                        text = "SpaceBetween:",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        repeat(3) { index ->
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.secondaryContainer
-                                )
-                            ) {
-                                Text(
-                                    text = "${index + 1}",
-                                    modifier = Modifier.padding(8.dp)
-                                )
-                            }
-                        }
-                    }
-                    
-                    Text(
-                        text = "SpaceAround:",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        repeat(3) { index ->
-                            Card(
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                                )
-                            ) {
-                                Text(
-                                    text = "${index + 1}",
-                                    modifier = Modifier.padding(8.dp)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        item {
+
+@Composable
+private fun ScrollingDemo() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             Text(
-                text = "🎉 Enhanced Foundation Components Complete!\n\n" +
-                        "This section now includes:\n\n" +
-                        "• Layout Primitives (Row, Column, Box)\n" +
-                        "• Typography System (All Material 3 styles)\n" +
-                        "• Lazy Lists & Grids (LazyRow, LazyVerticalGrid)\n" +
-                        "• BoxWithConstraints & Adaptive Layouts\n" +
-                        "• Spacing & Arrangement Strategies\n" +
-                        "• Surface & Card Components",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                text = "Scrolling",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
             )
+            
+            Text(
+                text = "Horizontal Scroll:",
+                style = MaterialTheme.typography.titleSmall
+            )
+            
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp)
+            ) {
+                items(10) { index ->
+                    Card(
+                        modifier = Modifier.size(80.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("$index")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LazyLayoutDemo() {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Lazy Grid",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(4),
+                modifier = Modifier.height(200.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(16) { index ->
+                    Card(
+                        modifier = Modifier.aspectRatio(1f),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                        )
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("$index")
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -75,6 +75,11 @@ dependencies {
     // Navigation Compose
     implementation(libs.navigation.compose)
     
+    // ConstraintLayout Compose
+    implementation(libs.constraintlayout.compose)
+    
+    // Testing dependencies
+    
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

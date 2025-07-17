@@ -19,6 +19,10 @@ import com.example.androidkotlinshowcase.ui.gestures.GesturesScreen
 import com.example.androidkotlinshowcase.ui.graphics.GraphicsScreen
 import com.example.androidkotlinshowcase.ui.system.SystemUIScreen
 import com.example.androidkotlinshowcase.ui.interop.InteropScreen
+import com.example.androidkotlinshowcase.ui.layouts.LayoutsScreen
+import com.example.androidkotlinshowcase.ui.lists.AdvancedListsScreen
+import com.example.androidkotlinshowcase.ui.input.InputFormsScreen
+import com.example.androidkotlinshowcase.ui.performance.PerformanceScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,6 +88,18 @@ fun ShowcaseApp(
             }
             composable(ShowcaseScreen.INTEROP.route) {
                 InteropScreen()
+            }
+            composable(ShowcaseScreen.LAYOUTS.route) {
+                LayoutsScreen()
+            }
+            composable(ShowcaseScreen.ADVANCED_LISTS.route) {
+                AdvancedListsScreen()
+            }
+            composable(ShowcaseScreen.INPUT_FORMS.route) {
+                InputFormsScreen()
+            }
+            composable(ShowcaseScreen.PERFORMANCE.route) {
+                PerformanceScreen()
             }
         }
     }

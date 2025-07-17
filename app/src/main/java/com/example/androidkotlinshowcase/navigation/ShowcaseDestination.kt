@@ -63,6 +63,30 @@ enum class ShowcaseScreen(
         title = "Interop",
         icon = Icons.Default.Share,
         description = "Legacy View Integration"
+    ),
+    LAYOUTS(
+        route = "layouts",
+        title = "Layouts",
+        icon = Icons.Default.Build,
+        description = "Advanced Layout Patterns"
+    ),
+    ADVANCED_LISTS(
+        route = "advanced_lists",
+        title = "Lists",
+        icon = Icons.Default.List,
+        description = "Grids & Advanced Lists"
+    ),
+    INPUT_FORMS(
+        route = "input_forms",
+        title = "Input",
+        icon = Icons.Default.Edit,
+        description = "Forms & Input Controls"
+    ),
+    PERFORMANCE(
+        route = "performance",
+        title = "Performance",
+        icon = Icons.Default.Settings,
+        description = "Optimization & Performance"
     )
 }
 
@@ -75,5 +99,9 @@ val showcaseScreens = listOf(
     ShowcaseScreen.GESTURES,
     ShowcaseScreen.GRAPHICS,
     ShowcaseScreen.SYSTEM_UI,
-    ShowcaseScreen.INTEROP
+    ShowcaseScreen.INTEROP,
+    ShowcaseScreen.LAYOUTS,
+    ShowcaseScreen.ADVANCED_LISTS,
+    ShowcaseScreen.INPUT_FORMS,
+    ShowcaseScreen.PERFORMANCE
 )
