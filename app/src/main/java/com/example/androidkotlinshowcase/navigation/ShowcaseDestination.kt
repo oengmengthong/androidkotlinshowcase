@@ -87,6 +87,12 @@ enum class ShowcaseScreen(
         title = "Performance",
         icon = Icons.Default.Settings,
         description = "Optimization & Performance"
+    ),
+    ADVANCED_UI(
+        route = "advanced_ui",
+        title = "Advanced UI",
+        icon = Icons.Default.Star,
+        description = "Advanced UI Patterns"
     )
 }
 
@@ -103,5 +109,6 @@ val showcaseScreens = listOf(
     ShowcaseScreen.LAYOUTS,
     ShowcaseScreen.ADVANCED_LISTS,
     ShowcaseScreen.INPUT_FORMS,
-    ShowcaseScreen.PERFORMANCE
+    ShowcaseScreen.PERFORMANCE,
+    ShowcaseScreen.ADVANCED_UI
 )

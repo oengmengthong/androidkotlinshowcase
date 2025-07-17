@@ -23,6 +23,7 @@ import com.example.androidkotlinshowcase.ui.layouts.LayoutsScreen
 import com.example.androidkotlinshowcase.ui.lists.AdvancedListsScreen
 import com.example.androidkotlinshowcase.ui.input.InputFormsScreen
 import com.example.androidkotlinshowcase.ui.performance.PerformanceScreen
+import com.example.androidkotlinshowcase.ui.advancedui.AdvancedUINav
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -100,6 +101,9 @@ fun ShowcaseApp(
             }
             composable(ShowcaseScreen.PERFORMANCE.route) {
                 PerformanceScreen()
+            }
+            composable(ShowcaseScreen.ADVANCED_UI.route) {
+                AdvancedUINav()
             }
         }
     }

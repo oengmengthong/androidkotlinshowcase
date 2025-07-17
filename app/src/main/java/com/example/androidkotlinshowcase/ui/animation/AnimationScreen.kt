@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.androidkotlinshowcase.ui.advancedui.SharedElementTransitionDemo
 
 @Composable
 fun AnimationScreen(
@@ -327,6 +328,10 @@ fun AnimationScreen(
                     }
                 }
             }
+        }
+        
+        item {
+            SharedElementTransitionDemo()
         }
         
         item {
