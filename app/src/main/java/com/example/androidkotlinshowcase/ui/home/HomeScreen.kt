@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -43,10 +44,138 @@ fun HomeScreen(
         
         // Feature Cards
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            items(showcaseScreens.drop(1)) { screen -> // Skip HOME screen
+            // Core Features Section
+            item {
+                Text(
+                    text = "🏗️ Core Features",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+            
+            val coreFeatures = listOf(
+                ShowcaseScreen.FOUNDATION,
+                ShowcaseScreen.MATERIAL3,
+                ShowcaseScreen.RUNTIME
+            )
+            
+            items(coreFeatures) { screen ->
+                Card(
+                    onClick = { navController.navigate(screen.route) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = screen.icon,
+                            contentDescription = screen.title,
+                            modifier = Modifier.size(40.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        
+                        Spacer(modifier = Modifier.width(16.dp))
+                        
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = screen.title,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            
+                            Text(
+                                text = screen.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+            
+            // Interactive Features Section
+            item {
+                Text(
+                    text = "🎭 Interactive Features",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+            
+            val interactiveFeatures = listOf(
+                ShowcaseScreen.ANIMATIONS,
+                ShowcaseScreen.GESTURES,
+                ShowcaseScreen.GRAPHICS,
+                ShowcaseScreen.INPUT_FORMS
+            )
+            
+            items(interactiveFeatures) { screen ->
+                Card(
+                    onClick = { navController.navigate(screen.route) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = screen.icon,
+                            contentDescription = screen.title,
+                            modifier = Modifier.size(40.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        
+                        Spacer(modifier = Modifier.width(16.dp))
+                        
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = screen.title,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            
+                            Text(
+                                text = screen.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+            
+            // System Integration Section
+            item {
+                Text(
+                    text = "🔧 System Integration",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+            
+            val systemFeatures = listOf(
+                ShowcaseScreen.SYSTEM_UI,
+                ShowcaseScreen.INTEROP,
+                ShowcaseScreen.LAYOUTS,
+                ShowcaseScreen.ADVANCED_LISTS
+            )
+            
+            items(systemFeatures) { screen ->
                 Card(
                     onClick = { navController.navigate(screen.route) },
                     modifier = Modifier.fillMaxWidth()

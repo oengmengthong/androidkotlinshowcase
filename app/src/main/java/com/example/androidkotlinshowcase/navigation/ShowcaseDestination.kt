@@ -112,3 +112,12 @@ val showcaseScreens = listOf(
     ShowcaseScreen.PERFORMANCE,
     ShowcaseScreen.ADVANCED_UI
 )
+
+// Main bottom navigation tabs (limited to 5 for better UX)
+val bottomNavigationScreens = listOf(
+    ShowcaseScreen.HOME,
+    ShowcaseScreen.FOUNDATION,
+    ShowcaseScreen.MATERIAL3,
+    ShowcaseScreen.ADVANCED_UI,
+    ShowcaseScreen.PERFORMANCE
+)
